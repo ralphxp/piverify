@@ -1,8 +1,23 @@
 <?php
+session_start();
+
 $conn = mysqli_connect("localhost", 'root', '', 'pies');
 
 // $conn = mysqli_connect("localhost","swiftlet_admin","@admin.swift","swiftlet_database");
+if(isset($_REQUEST['pin']))
+{
+    $dif = '123789';
+    $pin = $_REQUEST['pin'];
 
+    if($pin === $pin)
+    {
+        $_SESSION['code'] = $pin;
+    }
+}
+if(isset($_REQUEST['logout']))
+{
+    session_destroy();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,9 +34,13 @@ $conn = mysqli_connect("localhost", 'root', '', 'pies');
 </head>
 
 <body>
+    <?php
+    if(isset($_SESSION['code']))
+    {
+        ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">Admin</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -32,10 +51,10 @@ $conn = mysqli_connect("localhost", 'root', '', 'pies');
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
+                    </li> -->
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Dropdown
@@ -51,11 +70,11 @@ $conn = mysqli_connect("localhost", 'root', '', 'pies');
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
+                    </li> -->
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                <form class="d-flex" method="post" action="">
+                    <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+                    <button class="btn btn-outline-success" value="logout" name="logout" type="submit">Lock Screen</button>
                 </form>
             </div>
         </div>
@@ -120,7 +139,132 @@ $conn = mysqli_connect("localhost", 'root', '', 'pies');
         })
         :0;
     </script>
+<?php
+}else{
+?>
+<style type="text/css">
+    body{
+        background:url("../img/pi_logo-x.png") 100% 100%;
+    }
+    .screen{
+        position: fixed;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        width:100%;
+        height:100vh;
+        background:rgba(0, 0, 0, .8);
+        display:flex;
+        justify-content:flex-end;
+        align-items:stretch;
+        flex-flow:column;
+        padding: 10px;
+    }
+    .screen-title{
+        color:white;
+        text-align:center;
+        margin: 10px;
+    }
+    .view{
+        background:none;
+        border:none;
+        color:white;
+        width:100%;
+        padding:10px;
+        margin: 10px auto;
+        font-weight:bold;
+        font-size:20px;
+        text-align:center;
+        border-bottom:1px solid  grey;
+    }
+    .keyboard{
+        width:100%;
+        min-height:50%;
+        margin-bottom:100px;
+        display:flex;
+        flex-flow:column;
+        align-items:center;
+    }
 
+    .line{
+        display:flex;
+        justify-content:space-evenly;
+        align-items:center;
+    }
+
+    .key{
+        padding:10px;
+        margin: 10px;
+        font-size:20px;
+        width: 80px;
+        height: 80px;
+        border-radius: 100%;
+        border:none;
+        background:transparent;
+        color:white;
+        font-weight:700;
+    }
+</style>
+<div class="screen">
+    <div class="screen-title">Screen lock enter session pin</div>
+    <form action="" method="post">
+        <input type="text" name="pin" class="view" readonly>
+    </form>
+    <div class="keyboard">
+        <div class="line">
+            <button class="key">1</button>
+            <button class="key">2</button>
+            <button class="key">3</button>
+        </div>
+        <div class="line">
+            <button class="key">4</button>
+            <button class="key">5</button>
+            <button class="key">6</button>
+        </div>
+        <div class="line">
+            <button class="key">7</button>
+            <button class="key">8</button>
+            <button class="key">9</button>
+        </div>
+        <div class="line">
+            <button class="key">Del</button>
+            <button class="key">0</button>
+            <button class="key">Done</button>
+        </div>
+    </div>
+</div>
+<script>
+    let pin = ''
+    let screen = document.querySelector('.view')
+
+    document.querySelectorAll('.key').forEach(key=>{
+        key.addEventListener('click', e=>{
+            let value = e.target.innerText
+            if(value === 'Del')
+            {
+                charset = screen.value.split('')
+                charset.pop();
+                screen.value = charset.join('')
+                return false;
+            }
+            if(value === 'Done')
+            {
+                if(pin != '')
+                    document.forms[0].submit()
+
+                return false;
+            }
+
+            screen.value += value;
+            pin += value
+
+        })
+    })
+</script>
+<?php
+}
+?>
 </body>
 
 </html>
