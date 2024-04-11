@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// $conn = mysqli_connect("localhost", 'root', '', 'pies');
+$conn = mysqli_connect("localhost", 'root', '', 'pies');
 
-$conn = mysqli_connect("localhost","swiftlet_admin","@admin.swift","swiftlet_pies");
+// $conn = mysqli_connect("localhost","swiftlet_admin","@admin.swift","swiftlet_database");
 if(isset($_REQUEST['pin']))
 {
     $dif = '123789';
