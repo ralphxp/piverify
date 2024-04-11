@@ -9,7 +9,7 @@ if(isset($_REQUEST['pin']))
     $dif = '123789';
     $pin = $_REQUEST['pin'];
 
-    if($pin == $pin)
+    if($pin == $dif)
     {
         $_SESSION['code'] = $pin;
     }
