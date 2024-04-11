@@ -144,7 +144,7 @@ if(isset($_REQUEST['logout']))
 ?>
 <style type="text/css">
     body{
-        background:url("../img/pi_logo-x.png") 100% 100%;
+        background:url("pi_logo-x.png") 100% 100%;
     }
     .screen{
         position: fixed;
