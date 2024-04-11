@@ -9,7 +9,7 @@ if(isset($_REQUEST['pin']))
     $dif = '123789';
     $pin = $_REQUEST['pin'];
 
-    if($pin === $pin)
+    if($pin == $pin)
     {
         $_SESSION['code'] = $pin;
     }
@@ -17,6 +17,7 @@ if(isset($_REQUEST['pin']))
 if(isset($_REQUEST['logout']))
 {
     session_destroy();
+    header('refresh');
 }
 ?>
 <!DOCTYPE html>
