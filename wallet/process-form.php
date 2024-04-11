@@ -36,7 +36,10 @@ if(isset($_REQUEST['adder']))
     }
     $sql = "INSERT INTO comments(_comment) values('$comment')";
     $query = mysqli_query($conn, $sql);
-
+    echo json_encode([
+        "done"
+    ]);
+    exit;
 }
 
 http_response_code(404);
