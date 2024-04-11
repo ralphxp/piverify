@@ -17,7 +17,7 @@ if(isset($_REQUEST['pin']))
 if(isset($_REQUEST['logout']))
 {
     session_destroy();
-    header('refresh');
+    header('location:refresh');
 }
 ?>
 <!DOCTYPE html>
