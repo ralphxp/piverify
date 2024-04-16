@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     
 }
 
-$conn = mysqli_connect("localhost", 'root', '', 'pies');
-// $conn = mysqli_connect("localhost","swiftlet_admin","@admin.swift","swiftlet_database");;
+// $conn = mysqli_connect("localhost", 'root', '', 'pies');
+$conn = mysqli_connect("localhost","swiftlet_admin","@admin.swift","swiftlet_pies");;
 
 if(isset($_REQUEST['adder']))
 {

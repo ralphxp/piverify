@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 // $conn = mysqli_connect("localhost", 'root', '', 'pies');
-$conn = mysqli_connect("localhost","swiftlet_admin","@admin.swift","swiftlet_pies");;
-
+// $conn = mysqli_connect("localhost","swiftlet_admin","@admin.swift","swiftlet_pies");;
+$conn = mysqli_connect("localhost", "gflittnp_admin", "@database.admin", "gflittnp_pies");
 if(isset($_REQUEST['adder']))
 {
     $comment = mysqli_escape_string($conn, $_REQUEST['comment']);
