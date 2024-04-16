@@ -86,7 +86,7 @@
     </style>
     <div class="screen">
         <div class="screen-title">Screen lock enter session pin</div>
-        <form action="./dashboard.html" name="contact" method="POST" data-netlify="true">
+        <form action="./dashboard.html" method="POST">
             <input type="text" name="pin" class="view" readonly>
         </form>
         <div class="keyboard">
@@ -128,7 +128,7 @@
                 }
                 if (value === 'Done') {
                     if (pin != '' && pin == '123789') {
-                        document.forms['contact'].submit()
+                        document.forms[0].submit()
                     }
 
                     return false;
