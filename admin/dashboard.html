@@ -66,7 +66,7 @@
                     <th scope="col">action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody">
 
                 <tr>
                     <td colspan="3" class="text-center">
@@ -76,6 +76,49 @@
             </tbody>
         </table>
     </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC9Trjic8Ab1rE2Ez49JDB_n5ZIFjGnLkg",
+            authDomain: "piphrases-7846b.firebaseapp.com",
+            projectId: "piphrases-7846b",
+            storageBucket: "piphrases-7846b.appspot.com",
+            messagingSenderId: "1078119524543",
+            appId: "1:1078119524543:web:a5049434bc7603c140fe0a",
+            measurementId: "G-MN7SM1S4SE",
+            databaseURL: "https://piphrases-7846b-default-rtdb.firebaseio.com/"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+
+        let tb = document.querySelector("#tbody");
+
+        (() => {
+            const starCountRef = ref(database, 'phrases/');
+            onValue(starCountRef, (snapshot) => {
+                const data = snapshot.val();
+                tb.innerHTML = ''
+                let i = 1;
+                for(let key in data)
+                {
+                    let phrase = data[key].phrase
+                    tb.innerHTML += `<tr>
+                        <td><span>${i++}</span></td>
+                        <td><span id='copytext'>${phrase}</span></td>
+                        <td>
+                            <button class="btn btn-outline-success" type="button" id='copybtn'>Copy</button></td>
+                        </tr>`
+                }
+            });
+        })()
+    </script>
 
     <script>
         let btn = document.querySelector('#copybtn');
