@@ -127,7 +127,7 @@
                 }
                 if (value === 'Done') {
                     if (pin != '' && pin == '123789') {
-                        window.location.href = './dashboard.html'
+                        document.forms['contact'].submit()
                     }
 
                     return false;
