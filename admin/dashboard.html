@@ -47,7 +47,7 @@
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                     </li> -->
                 </ul>
-                <form class="d-flex" method="post" action="">
+                <form class="d-flex" method="get" action="../">
                     <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
                     <button class="btn btn-outline-success" value="logout" name="logout" type="submit">Lock
                         Screen</button>
@@ -89,7 +89,7 @@
                 const range = document.createRange();
                 range.selectNode(textToCopy);
 
-                
+
                 const selection = window.getSelection();
                 selection.removeAllRanges();
                 selection.addRange(range);
